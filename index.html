@@ -17,7 +17,7 @@
   Use an event attribute to show the game instructions
   1. In the p tag, insert an onmouseover attribute to call the function named instructions
   2. Change the onmouseover attribute to onclick and test it
-  3. Remove the onclick attribute and go on to step 2
+  3. Remove the onclick attribute and go on to step2
   -->
   <p>How to play</p>
   <div class="drumset">
@@ -48,21 +48,13 @@
     2. Use the querySelector() method to select the p tag and assign it a variable.
     3. Set the ptag object's onclick event handler property to an anon function that shows an alert with the instructions. 
     */
-
+    let howTo=document.querySelector("p");
+    howTo.addEventListener("click",()=>{alert("Hover over a drum picture to play its sound. Type one of the keys on your keyboard to add guitar sounds");})
    
 
-    function instructions() {
-      alert("Hover over a drum picture to play its sound. Type one of the keys on your keyboard to add guitar sounds");
-    }
-
-    /* Exercise 3 
-    Selecting elements we need from the DOM and assigning them a global variable:
-    1. Use the querySelectorAll() method to select the .drumset-part img tags and assign them a variable.
-    2. Use the forEach() method to loop through each drumset part and add an event listener for 'mouseover', have it call the playDrums function 
-    */
-    
-
-
+    // function instructions() {
+    //   alert("Hover over a drum picture to play its sound. Type one of the keys on your keyboard to add guitar sounds");
+    // }
 
     /* Exercise 4
     1. Create a function called playDrums with one parameter - event
@@ -72,6 +64,26 @@
     5. Set the audio's currentTime to 0
     6. Play the audio using play() method
     */
+    let playDrums=(event)=>{
+      console.log(event);
+      let target=event.currentTarget.id;
+      let audio=document.querySelector(`#${target}-audio`);
+      console.log(audio);
+      audio.currentTime=0;
+      audio.play();
+    }
+    /* Exercise 3 
+    Selecting elements we need from the DOM and assigning them a global variable:
+    1. Use the querySelectorAll() method to select the .drumset-part img tags and assign them a variable.
+    2. Use the forEach() method to loop through each drumset part and add an event listener for 'mouseover', have it call the playDrums function 
+    */
+    let drumImages=document.querySelectorAll(".drumset-part");
+    drumImages.forEach((e)=>{
+      e.addEventListener("mouseover", playDrums);
+    })
+
+
+
 
     
 
@@ -104,7 +116,8 @@
     2. Have it call a function called playGuitar
     */
 
-   
+
+
 
 
 
@@ -118,8 +131,11 @@
     5. Set currentTime to 0
     6. Play the audio
     */
-
-
+    let playGuitar=(e)=>{
+      let myKey=e.key;
+      console.log(myKey);
+    }
+    body.addEventListener("keydown", playGuitar);
 
 
     /* Bonus
